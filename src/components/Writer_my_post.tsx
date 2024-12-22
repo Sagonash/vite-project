@@ -9,16 +9,31 @@ import Post_write_create from './Post_write_create'
 import { Link } from 'react-router-dom'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import { Upload } from 'lucide-react'
+import { Upload, Trash2 } from 'lucide-react'
+import { useRef } from 'react'
 
 const Writer_my_post = () => {
 
+    const btnRef = useRef();
+    const bgRef = useRef();
+    const popupRef = useRef();
+    const placeRef = useRef();
+
+    const btnChange = () => {
+        btnRef.current.style.display = "none";
+        placeRef.current.style.display = "flex";
+        bgRef.current.style.height = "618px";
+    }
+
     const WinClose = () => {
-        document.getElementById('parent_popup').style.display='none';
+        btnRef.current.style.display = "flex";
+        placeRef.current.style.display = "none";
+        popupRef.current.style.display = "none";
+        bgRef.current.style.height = "370px";
     }
 
     const WinOpen = () => {
-        document.getElementById('parent_popup').style.display='flex';
+        popupRef.current.style.display = "flex";
     }
 
     return(
@@ -53,17 +68,21 @@ const Writer_my_post = () => {
                         Создать пост
                     </Button>
                     <Post_write_create/>
+                    <Post_write_create/>
                 </div>
                 <img className='h-36' src={Adv} alt='Advert'></img>
             </section>
-            <div id="parent_popup" className='bg-[#00000052] opacity-90 fixed min-w-full min-h-full z-10 top-0 left-0 hidden'>
-                <div id="popup" className='relative text-baseColor w-[544px] h-[370px] bg-white m-auto rounded'>
-                    <h4 className='font-customFont text-xl font-semibold tracking-[-0.005em] ml-4 mt-4'>Создать пост</h4>
-                    <Label className='font-customFont font-medium text-sm ml-4 mt-4'>Заголовок</Label>
+            <div ref={popupRef} className='bg-[#00000052] opacity-100 fixed min-w-full min-h-full z-10 top-0 left-0 hidden'>
+                <div ref={bgRef} className='relative text-baseColor w-[544px] h-[370px] bg-white m-auto rounded'>
+                    <h4 className='font-customFont text-xl font-semibold tracking-[-0.005em] ml-4 my-4'>Создать пост</h4>
+                    <Label className='font-customFont font-medium text-sm ml-4'>Заголовок</Label>
                     <Input className='ml-4 mt-[6px] rounded w-[512px]' type='text' placeholder='Введите заголовок'></Input>
-                    <Button id='add' className='ml-4 mt-4 rounded font-customFont font-medium text-sm leading-6'><Upload/>
+                    <Button ref={btnRef} onClick={btnChange} id='add' className='ml-4 mt-4 rounded font-customFont font-medium text-sm leading-6'><Upload/>
                         Добавить картинку
                     </Button>
+                    <div ref={placeRef} className='hidden w-[512px] h-[288px] rounded bg-slate-300 ml-4 mt-4 hover:bg-[#00000052] group'>
+                        <Trash2 className='text-white ml-[472px] mt-4 hidden group-hover:flex'/>
+                    </div>
                     <Label className='font-customFont font-medium text-sm ml-4 mt-4 block'>Контент</Label>
                     <Input className='ml-4 mt-[6px] rounded w-[512px] h-20' type='text' placeholder='Введите контент'></Input>
                     <div className='ml-4 mt-4'>

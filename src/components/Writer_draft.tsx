@@ -8,12 +8,31 @@ import { Menubar, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar'
 import { Link } from 'react-router-dom'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import { Upload } from 'lucide-react'
+import { Upload, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useRef, useEffect } from 'react'
 
 const Writer_draft = () => {
 
+    const btnRef = useRef();
+    const bgRef = useRef();
+    const placeRef = useRef();
+
+    useEffect(() => {
+        // после рендеринга в element.current попадет ссылка на элемент
+        console.log(bgRef.current);
+    }, []);
+
+    const btnChange = () => {
+        btnRef.current.style.display = "none";
+        placeRef.current.style.display = "flex";
+        bgRef.current.style.height = "618px";
+    }
+
     const WinClose = () => {
+        btnRef.current.style.display = "flex";
+        placeRef.current.style.display = "none";
+        bgRef.current.style.height = "370px";
         document.getElementById('parent_popup').style.display='none';
     }
 
@@ -49,14 +68,17 @@ const Writer_draft = () => {
                 </div>
                 <img className='h-36' src={Adv} alt='Advert'></img>
             </section>
-            <div id="parent_popup" className='bg-[#00000052] opacity-90 fixed min-w-full min-h-full z-10 top-0 left-0 hidden'>
-                <div id="popup" className='relative text-baseColor w-[544px] h-[370px] bg-white m-auto rounded'>
-                    <h4 className='font-customFont text-xl font-semibold tracking-[-0.005em] ml-4 mt-4'>Редактировать</h4>
-                    <Label className='font-customFont font-medium text-sm ml-4 mt-4'>Заголовок</Label>
+            <div id="parent_popup" className='bg-[#00000052] opacity-100 fixed min-w-full min-h-full z-10 top-0 left-0 hidden'>
+                <div ref={bgRef} className='relative text-baseColor w-[544px] h-[370px] bg-white m-auto rounded'>
+                    <h4 className='font-customFont text-xl font-semibold tracking-[-0.005em] ml-4 my-4'>Редактировать</h4>
+                    <Label className='font-customFont font-medium text-sm ml-4'>Заголовок</Label>
                     <Input className='ml-4 mt-[6px] rounded w-[512px]' type='text' placeholder='Введите заголовок'></Input>
-                    <Button id='add' className='ml-4 mt-4 rounded font-customFont font-medium text-sm leading-6'><Upload/>
+                    <Button ref={btnRef} onClick={btnChange} id='add' className='ml-4 mt-4 rounded font-customFont font-medium text-sm leading-6'><Upload/>
                         Добавить картинку
                     </Button>
+                    <div ref={placeRef} className='hidden w-[512px] h-[288px] rounded bg-slate-300 ml-4 mt-4 hover:bg-[#00000052] group'>
+                        <Trash2 className='text-white ml-[472px] mt-4 hidden group-hover:flex'/>
+                    </div>
                     <Label className='font-customFont font-medium text-sm ml-4 mt-4 block'>Контент</Label>
                     <Input className='ml-4 mt-[6px] rounded w-[512px] h-20' type='text' placeholder='Введите контент'></Input>
                     <div className='ml-4 mt-4'>
