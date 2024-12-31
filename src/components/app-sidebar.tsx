@@ -6,7 +6,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -14,14 +13,13 @@ import {
 
 export function AppSidebar() {
     return (
-        <Sidebar collapsible="none">
-          <SidebarHeader className="sticky"/>
-          <SidebarContent>
-            <SidebarGroup>
+        <Sidebar collapsible="none" className="h-screen sticky">
+          <SidebarContent className="sticky">
+            <SidebarGroup className="p-0">
               <SidebarGroupContent>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
+                      <SidebarMenuButton className="hover:text-slate-900 text-slate-400" asChild>
                         <a href="#">
                           <Newspaper/>
                           <span className="font-customFont">Посты</span>
@@ -29,10 +27,10 @@ export function AppSidebar() {
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild>
+                      <SidebarMenuButton className="hover:text-slate-900 text-slate-400" asChild>
                         <a href="#">
-                          <Phone className="text-slate-400"/>
-                          <span className="text-slate-400 font-customFont">Контакты</span>
+                          <Phone/>
+                          <span className="font-customFont">Контакты</span>
                         </a>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -40,13 +38,13 @@ export function AppSidebar() {
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
-          <SidebarFooter className="sticky">
+          <SidebarFooter className="sticky p-0">
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton className="hover:text-slate-900 text-slate-400" asChild>
                         <a href='/Login'>
-                            <LogOut className="text-slate-400"></LogOut>
-                            <span className="text-slate-400">Выйти</span>
+                            <LogOut></LogOut>
+                            <span className="font-customFont">Выйти</span>
                         </a>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
