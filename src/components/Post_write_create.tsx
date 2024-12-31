@@ -5,7 +5,7 @@ import { Heart, MessageCircle } from "lucide-react"
 const Post_write_create = () => {
     return(
         <div className='w-[768px] h-[780px] hover:bg-slate-200 rounded space-x-4 space-y-4'>
-            <div className='flex items-center justify-start ml-4 mt-4'>
+            <div className='flex items-center justify-start ml-4 pt-4'>
                 <Avatar><AvatarFallback className='font-customFont'>CN</AvatarFallback></Avatar>
                 <div className='flex-col ml-2'>
                     <div className='font-customFont text-sm font-normal leading-6'>pochta@gmail.com</div>
@@ -13,7 +13,7 @@ const Post_write_create = () => {
                 </div>
             </div>
             <h4 className='font-customFont text-xl font-semibold'>Заголовок</h4>
-            <div className='w-[736px] h-[432px] bg-slate-300'></div>
+            <div className='w-[736px] h-[432px] bg-slate-300 rounded'></div>
             <p className='font-customFont text-sm font-normal leading-6 text-baseColor'>
                 Повседневная практика показывает, что социально-экономическое развитие способствует подготовке и реализации распределения внутренних резервов и ресурсов. Предварительные выводы неутешительны: перспективное планирование не даёт нам иного выбора, кроме определения экономической целесообразности принимаемых решений.
             </p>

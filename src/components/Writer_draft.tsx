@@ -1,6 +1,6 @@
 import Logo from '@/images/logo.svg'
-import Adv from '@/images/adv.png'
 import { Avatar, AvatarFallback} from "@/components/ui/avatar"
+import Adv from '@/images/adv.png'
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import Post_draft from '@/components/Post_draft'
@@ -10,18 +10,13 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Upload, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useRef, useEffect } from 'react'
+import { useRef} from 'react'
 
 const Writer_draft = () => {
 
     const btnRef = useRef();
     const bgRef = useRef();
     const placeRef = useRef();
-
-    useEffect(() => {
-        // после рендеринга в element.current попадет ссылка на элемент
-        console.log(bgRef.current);
-    }, []);
 
     const btnChange = () => {
         btnRef.current.style.display = "none";
@@ -38,7 +33,7 @@ const Writer_draft = () => {
 
     return(
         <div>
-            <header className='flex justify-between items-center h-20 w-3/4 m-auto'>
+            <header className='flex justify-between items-center h-20 w-3/4 m-auto mb-12'>
                 <img src={Logo} alt="Logo"></img>
                 <div className='flex items-center'>
                     <p className='font-normal leading-6 text-sm text-baseColor mr-3'>pochta@gmail.com</p>
@@ -46,19 +41,23 @@ const Writer_draft = () => {
                 </div>
             </header>
             <section className='w-3/4 m-auto flex flex-row justify-between'>
-                <SidebarProvider className='w-52 sticky top-0 h-[872px]'>
+                <SidebarProvider className='w-52 sticky top-0 h-screen'>
                     <AppSidebar />
                 </SidebarProvider>
                 <div className='space-y-[32px]'>
                     <Menubar className='w-[307px] h-10 rounded'>
                         <MenubarMenu>
-                            <MenubarTrigger className='font-customFont text-sm font-medium py-[6px] w-[96px] h-8 ml-0'>
+                            <MenubarTrigger className='font-customFont text-sm font-medium py-[6px] w-[96px] h-8 ml-0 hover:bg-zinc-100'>
                                 <Link to="/Writer_post">Все посты</Link>
                             </MenubarTrigger>
-                            <MenubarTrigger className='font-customFont text-sm font-medium py-[6px] w-[100px] h-8 ml-0'>
+                        </MenubarMenu>
+                        <MenubarMenu>
+                            <MenubarTrigger className='font-customFont text-sm font-medium py-[6px] w-[100px] h-8 ml-0 hover:bg-zinc-100'>
                                 <Link to="/Writer_my_post">Мои посты</Link>
                             </MenubarTrigger>
-                            <MenubarTrigger className='font-customFont text-sm font-medium py-[6px] w-[92px] h-8 ml-0'>
+                        </MenubarMenu>
+                        <MenubarMenu>
+                            <MenubarTrigger className='font-customFont text-sm font-medium py-[6px] w-[92px] h-8 ml-0 hover:bg-zinc-100'>
                                 <Link to="/Writer_draft">Черновики</Link>
                             </MenubarTrigger>
                         </MenubarMenu>
@@ -66,7 +65,7 @@ const Writer_draft = () => {
                     <Post_draft/>
                     <Post_draft/>
                 </div>
-                <img className='h-36' src={Adv} alt='Advert'></img>
+                <img className='h-36 ml-[32px] mt-[72px]' src={Adv} alt='Advert'></img>
             </section>
             <div id="parent_popup" className='bg-[#00000052] opacity-100 fixed min-w-full min-h-full z-10 top-0 left-0 hidden'>
                 <div ref={bgRef} className='relative text-baseColor w-[544px] h-[370px] bg-white m-auto rounded'>
