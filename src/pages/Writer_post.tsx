@@ -1,13 +1,14 @@
 import Logo from '@/images/logo.svg'
-import Adv from '@/images/adv.png'
 import { Avatar, AvatarFallback} from "@/components/ui/avatar"
+import Adv from '@/images/adv.png'
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
-import Post from '@/components/Post'
+import Post_write from '@/components/Post_write'
+import MenuBar from '@/components/Menubar'
 
-const Reader_post = () => {
+const Writer_post = () => {
     return(
-        <div>
+        <div className='bg-slate-50'>
             <header className='flex justify-between items-center h-20 w-3/4 m-auto mb-12'>
                 <img src={Logo} alt="Logo"></img>
                 <div className='flex items-center'>
@@ -15,18 +16,19 @@ const Reader_post = () => {
                     <Avatar><AvatarFallback className='font-customFont'>CN</AvatarFallback></Avatar>
                 </div>
             </header>
-            <section className='w-3/4 m-auto flex flex-row justify-between'>
+            <section className='w-3/4 m-auto flex flex-row justify-center space-x-8'>
                 <SidebarProvider className='w-52 sticky top-0 h-screen'>
                     <AppSidebar />
                 </SidebarProvider>
-                <div className='space-y-[72px]'>
-                    <Post/>
-                    <Post/>
+                <div className='space-y-6'>
+                    <MenuBar/>
+                    <Post_write/>
+                    <Post_write/>
                 </div>
-                <img className='h-36 ml-[32px]' src={Adv} alt='Advert'></img>
+                <img className='h-36 ml-[32px] mt-[72px]' src={Adv} alt='Advert'></img>
             </section>
         </div>
     )
 }
 
-export default Reader_post;
+export default Writer_post;
