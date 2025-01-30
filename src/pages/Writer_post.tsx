@@ -4,7 +4,7 @@ import Adv from '@/images/adv.png'
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import Post_write from '@/components/Post_write'
-import MenuBar from '@/components/Menubar'
+import MenuBar from '@/components/MenuBar'
 
 const Writer_post = () => {
     return(

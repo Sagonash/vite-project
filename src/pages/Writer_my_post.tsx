@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Upload, Trash2, CircleX } from 'lucide-react'
 import { useRef } from 'react'
-import MenuBar from '@/components/Menubar'
+import MenuBar from '@/components/MenuBar'
 
 const Writer_my_post = () => {
 

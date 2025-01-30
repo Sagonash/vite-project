@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Upload, Trash2, CircleX } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useRef} from 'react'
-import MenuBar from '@/components/Menubar'
+import MenuBar from '@/components/MenuBar'
 
 const Writer_draft = () => {
 
