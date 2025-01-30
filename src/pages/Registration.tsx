@@ -26,7 +26,7 @@ const Registration = () => {
             console.log("firstRender error");
             console.log(error)
         })
-    })
+    }, [])
 
     const [state, setState] = useState('/Reader_post');
     const [Email, setEmail] = useState('')

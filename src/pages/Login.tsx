@@ -56,20 +56,6 @@ const Login = () => {
         })
     }
 
-    const tmp = () => {
-        axios.get('https://cpt-stage-2.duckdns.org/api/users/me', {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem('accessToken')
-            }
-        })
-        .then(function(response){
-            console.log(response.data.role)
-        })
-        .catch(function(error){
-            console.log("getRole error");
-            console.log(error)
-        })
-    }
     return (
         <div className="flex min-h-screen flex-col justify-center items-center bg-slate-50">
             <div className='bg-white w-[416px] h-[320px] rounded-xl space-y-4 space-x-4'>
@@ -86,7 +72,6 @@ const Login = () => {
                     <Link className='text-indigo-500 font-customFont' to="/Registration"> Создать аккаунт</Link>
                 </div>
             </div>
-            <Button onClick={tmp}></Button>
         </div>
     );
 };
