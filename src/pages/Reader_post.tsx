@@ -4,8 +4,37 @@ import { Avatar, AvatarFallback} from "@/components/ui/avatar"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import Post from '@/components/Post'
+import { Button } from '@/components/ui/button'
+import axios from 'axios';
 
 const Reader_post = () => {
+
+    // const tmp = () => {
+    //     axios.get('https://cpt-stage-2.duckdns.org/api/posts',{
+    //         headers:{
+    //             Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+    //         }
+    //     })
+    //     .then(function(response){
+    //         console.log(response)
+    //         console.log(response.data)
+    //         console.log(response.data[0].authorId)
+    //         // axios.get('https://cpt-stage-2.duckdns.org/api/users/me',{
+    //         //     'id': response.data[0].authorId
+    //         // })
+    //         // .then(function(response){
+    //         //     console.log(response)
+    //         // })
+    //         // .catch(function(error){
+    //         //     console.log('error')
+    //         //     console.log(error)
+    //         // })
+    //     })
+    //     .catch(function(error){
+    //         console.log(error)
+    //     })
+    // }
+
     return(
         <div className='bg-slate-50'>
             <header className='flex justify-between items-center h-20 w-3/4 m-auto mb-12'>
@@ -25,6 +54,7 @@ const Reader_post = () => {
                 </div>
                 <img className='h-36 ml-[32px]' src={Adv} alt='Advert'></img>
             </section>
+            {/* <Button onClick={tmp}>postlist</Button> */}
         </div>
     )
 }

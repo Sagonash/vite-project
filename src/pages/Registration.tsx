@@ -4,31 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label'
 import MyInput from '@/components/MyInput'
 import axios from 'axios';
-// import { Form } from '@/components/ui/form'
 
 const Registration = () => {
 
-    React.useEffect(() => {
-        axios.get('https://cpt-stage-2.duckdns.org/api/users/me', {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem('accessToken')
-            }
-        })
-        .then(function(response){
-            if (response.data.role === 'Reader'){
-                window.location = "/Reader_post"
-            }
-            else{
-                window.location = "/Writer_post"
-            }
-        })
-        .catch(function(error){
-            console.log("firstRender error");
-            console.log(error)
-        })
-    }, [])
-
-    const [state, setState] = useState('/Reader_post');
     const [Email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
     const [PasswordRepeat, setPasswordRepeat] = useState('')
@@ -42,16 +20,37 @@ const Registration = () => {
         }
         e.currentTarget.style.backgroundColor = "#FFFFFF";
         if (e.currentTarget.id === "reader"){
-            setState("/Reader_post");
             setRole('reader')
         }
         else{
-            setState("/Writer_post");
             setRole('author')
         }
     };
 
-    const register = () => {
+    axios.interceptors.response.use(undefined, error => {
+        if (error.message === "Network Error") {
+            console.log('inter error')
+            refresh()
+        }
+    });
+
+    React.useEffect(() => {
+        axios.get('https://cpt-stage-2.duckdns.org/api/users/me', {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('accessToken')
+            }
+        })
+        .then(function(response){
+            redirect(response.data.role)
+        })
+        .catch(function(error){
+            console.log("firstRender error");
+            console.log(error);
+        })
+    }, [])
+
+    const register = (e) => {
+        e.preventDefault()
         if (Password !== PasswordRepeat) return;
         axios.post('https://cpt-stage-2.duckdns.org/api/auth/register',{
             email: Email,
@@ -61,20 +60,51 @@ const Registration = () => {
         .then(function(response){
             localStorage.setItem("accessToken", response.data.accessToken);
             localStorage.setItem("refreshToken", response.data.refreshToken);
-            redirect()
+            redirect(response.data.role)
         })
         .catch(function(error){
             console.log(error);
         })
     };
 
-    const redirect = () => {
+    const redirect = (Role) => {
         if (Role === 'Reader'){
             window.location = "/Reader_post"
         }
         else{
             window.location = "/Writer_post"
         }
+    }
+
+    const refresh = () => {
+        axios.post('https://cpt-stage-2.duckdns.org/api/auth/refresh-token?refreshToken=' + localStorage.getItem('refreshToken'))
+        .then(function(response){
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("refreshToken", response.data.refreshToken);
+            redirect(response.data.role)
+        })
+        .catch(function(error){
+            console.log(error)
+            localStorage.removeItem("accessToken")
+            localStorage.removeItem("refreshToken")
+        })
+    }
+
+    const tmp = () => {
+        axios.get('https://cpt-stage-2.duckdns.org/api/posts',{
+            headers:{
+                Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+            }
+        })
+        .then(function(response){
+            console.log('tmp then')
+            console.log(response)
+            console.log(response.data)
+            console.log(response.headers)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
     }
 
     return (
@@ -100,14 +130,15 @@ const Registration = () => {
                         </Button>
                     </div>
                 </div>
-                <Button className='w-96 h-10 font-customFont bg-slate-900 text-sm font-medium rounded-[6px]' onClick={register} asChild>
-                    <Link to={state}>Создать аккаунт</Link>
+                <Button type='submit' className='w-96 h-10 font-customFont bg-slate-900 text-sm font-medium rounded-[6px]' onClick={register}>
+                    Создать аккаунт
                 </Button>
                 <div className='font-customFont text-slate-900'>
                     Уже есть аккаунт?
                     <Link className='text-indigo-500 font-customFont' to="/Login"> Войти</Link>
                 </div>
             </div>
+            {/* <Button onClick={refresh}>asdf</Button> */}
         </div>
     );
 };

@@ -9,17 +9,6 @@ const Login = () => {
     const [Email, setMail] = useState("");
     const [Password, setPassword] = useState("");
 
-    // axios.interceptors.response.use(function (response) {
-    //     // Any status code that lie within the range of 2xx cause this function to trigger
-    //     // Do something with response data
-    //     getRole();
-    //     return response;
-    //   }, function (error) {
-    //     // Any status codes that falls outside the range of 2xx cause this function to trigger
-    //     // Do something with response error
-    //     return Promise.reject(error);
-    //   });
-
     const login = (e) => {
         e.preventDefault();
         axios.post('https://cpt-stage-2.duckdns.org/api/auth/login',{
@@ -36,6 +25,15 @@ const Login = () => {
         })
     }
 
+    const redirect = (Role) => {
+        if (Role === 'Reader'){
+            window.location = "/Reader_post"
+        }
+        else{
+            window.location = "/Writer_post"
+        }
+    }
+
     const getRole = () => {
         axios.get('https://cpt-stage-2.duckdns.org/api/users/me', {
             headers: {
@@ -43,18 +41,27 @@ const Login = () => {
             }
         })
         .then(function(response){
-            if (response.data.role === 'Reader'){
-                window.location = "/Reader_post"
-            }
-            else{
-                window.location = "/Writer_post"
-            }
+            redirect(response.data.role)
         })
         .catch(function(error){
             console.log("getRole error");
             console.log(error)
         })
     }
+
+    // const tmp = () => {
+    //     axios.get('https://cpt-stage-2.duckdns.org/api/users/me',{
+    //         headers: {
+    //             Authorization: "Bearer " + localStorage.getItem('accessToken')
+    //         }
+    //     })
+    //     .then(function(response){
+    //         console.log(response)
+    //     })
+    //     .catch(function(error){
+    //         console.log(error)
+    //     })
+    // }
 
     return (
         <div className="flex min-h-screen flex-col justify-center items-center bg-slate-50">
@@ -72,6 +79,7 @@ const Login = () => {
                     <Link className='text-indigo-500 font-customFont' to="/Registration"> Создать аккаунт</Link>
                 </div>
             </div>
+            {/* <Button onClick={tmp}>asdf</Button> */}
         </div>
     );
 };
