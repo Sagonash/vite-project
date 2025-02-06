@@ -6,6 +6,11 @@ import { AppSidebar } from "@/components/app-sidebar"
 import Post from '@/components/Post'
 
 const Reader_post = () => {
+
+    // const tmp = () => {
+    //
+    // }
+
     return(
         <div className='bg-slate-50'>
             <header className='flex justify-between items-center h-20 w-3/4 m-auto mb-12'>

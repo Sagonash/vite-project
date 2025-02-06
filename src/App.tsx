@@ -1,7 +1,6 @@
 import Login from '@/pages/Login';
 import Registration from '@/pages/Registration';
 import Reader_post from '@/pages/Reader_post';
-import Reader_post_inside from '@/pages/Reader_post_inside';
 import Writer_post from '@/pages/Writer_post';
 import Writer_my_post from '@/pages/Writer_my_post';
 import Writer_draft from '@/pages/Writer_draft';
@@ -35,11 +34,6 @@ function App() {
                 <Route
                     path='/Reader_post'
                     element={<Reader_post/>}
-                />
-
-                <Route
-                    path='/Reader_post_inside'
-                    element={<Reader_post_inside/>}
                 />
 
                 <Route
