@@ -26,25 +26,41 @@ const Login = () => {
         })
     }
 
-    // const getRole = () => {
-    //     client.get(`${client.defaults.baseURL}/users/me`)
-    //     .then(function(response){
-    //         return response
-    //     })
-    //     .catch(function(error){
-    //         console.log("getRole error");
-    //         console.log(error)
-    //     })
-    // }
+    const redirect = (Role) => {
+        if (Role === 'Reader'){
+            window.location = "/Reader_post"
+        }
+        else{
+            window.location = "/Writer_post"
+        }
+    }
+
+    const getRole = () => {
+        axios.get('https://cpt-stage-2.duckdns.org/api/users/me', {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('accessToken')
+            }
+        })
+        .then(function(response){
+            redirect(response.data.role)
+        })
+        .catch(function(error){
+            console.log("getRole error");
+            console.log(error)
+        })
+    }
 
     // const tmp = () => {
-    //     client.get(`${client.defaults.baseURL}/posts`).then(response => {
-    //         console.log('posts response');
-    //         console.log(response);
+    //     axios.get('https://cpt-stage-2.duckdns.org/api/users/me',{
+    //         headers: {
+    //             Authorization: "Bearer " + localStorage.getItem('accessToken')
+    //         }
     //     })
-    //     .catch(error => {
-    //         console.log('posts error');
-    //         console.log(error);
+    //     .then(function(response){
+    //         console.log(response)
+    //     })
+    //     .catch(function(error){
+    //         console.log(error)
     //     })
     // }
 

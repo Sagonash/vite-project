@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label'
 import MyInput from '@/components/MyInput'
 import axios from 'axios';
-import { client } from '@/components/api'
 
 const Registration = () => {
 
@@ -23,15 +22,29 @@ const Registration = () => {
         if (e.currentTarget.id === "reader"){
             setRole('reader')
         }
-        else setRole('author')
+        else{
+            setRole('author')
+        }
     };
 
+    axios.interceptors.response.use(undefined, error => {
+        if (error.message === "Network Error") {
+            console.log('inter error')
+            refresh()
+        }
+    });
+
     React.useEffect(() => {
-        client.get('https://cpt-stage-2.duckdns.org/api/users/me')
-        .then(response => {
-            window.location = 'Writer_my_post'
+        axios.get('https://cpt-stage-2.duckdns.org/api/users/me', {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('accessToken')
+            }
+        })
+        .then(function(response){
+            redirect(response.data.role)
         })
         .catch(function(error){
+            console.log("firstRender error");
             console.log(error);
         })
     }, [])
@@ -47,46 +60,52 @@ const Registration = () => {
         .then(function(response){
             localStorage.setItem("accessToken", response.data.accessToken);
             localStorage.setItem("refreshToken", response.data.refreshToken);
-            window.location = 'Writer_my_post'
+            redirect(response.data.role)
         })
         .catch(function(error){
             console.log(error);
         })
     };
 
-    // const redirect = (Role) => {
-    //     if (Role === 'Reader'){
-    //         window.location = "/Reader_post"
-    //     }
-    //     else{
-    //         window.location = "/Writer_post"
-    //     }
-    // }
+    const redirect = (Role) => {
+        if (Role === 'Reader'){
+            window.location = "/Reader_post"
+        }
+        else{
+            window.location = "/Writer_post"
+        }
+    }
 
-    // const refresh = () => {
-    //     axios.post('https://cpt-stage-2.duckdns.org/api/auth/refresh-token?refreshToken=' + localStorage.getItem('refreshToken'))
-    //     .then(function(response){
-    //         localStorage.setItem("accessToken", response.data.accessToken);
-    //         localStorage.setItem("refreshToken", response.data.refreshToken);
-    //         redirect(response.data.role)
-    //     })
-    //     .catch(function(error){
-    //         console.log(error)
-    //         localStorage.removeItem("accessToken")
-    //         localStorage.removeItem("refreshToken")
-    //     })
-    // }
+    const refresh = () => {
+        axios.post('https://cpt-stage-2.duckdns.org/api/auth/refresh-token?refreshToken=' + localStorage.getItem('refreshToken'))
+        .then(function(response){
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("refreshToken", response.data.refreshToken);
+            redirect(response.data.role)
+        })
+        .catch(function(error){
+            console.log(error)
+            localStorage.removeItem("accessToken")
+            localStorage.removeItem("refreshToken")
+        })
+    }
 
-    // const tmp = () => {
-    //     client.get(`${client.defaults.baseURL}/posts`).then(response => {
-    //         console.log('posts response');
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         console.log('posts error');
-    //         console.log(error);
-    //     })
-    // }
+    const tmp = () => {
+        axios.get('https://cpt-stage-2.duckdns.org/api/posts',{
+            headers:{
+                Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+            }
+        })
+        .then(function(response){
+            console.log('tmp then')
+            console.log(response)
+            console.log(response.data)
+            console.log(response.headers)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    }
 
     return (
         <div className='flex min-h-screen flex-col justify-center items-center bg-slate-50'>
@@ -119,7 +138,7 @@ const Registration = () => {
                     <Link className='text-indigo-500 font-customFont' to="/Login"> Войти</Link>
                 </div>
             </div>
-            {/* <Button onClick={tmp}>asdf</Button> */}
+            {/* <Button onClick={refresh}>asdf</Button> */}
         </div>
     );
 };
