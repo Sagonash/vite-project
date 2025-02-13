@@ -21,6 +21,7 @@ client.interceptors.response.use(response => {
         .catch(function(refError){
             localStorage.removeItem("accessToken")
             localStorage.removeItem("refreshToken")
+            console.log(refError)
         })
         return new Promise(() => { })
     }
