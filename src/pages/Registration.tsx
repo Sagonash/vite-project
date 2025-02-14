@@ -54,40 +54,6 @@ const Registration = () => {
         })
     };
 
-    // const redirect = (Role) => {
-    //     if (Role === 'Reader'){
-    //         window.location = "/Reader_post"
-    //     }
-    //     else{
-    //         window.location = "/Writer_post"
-    //     }
-    // }
-
-    // const refresh = () => {
-    //     axios.post('https://cpt-stage-2.duckdns.org/api/auth/refresh-token?refreshToken=' + localStorage.getItem('refreshToken'))
-    //     .then(function(response){
-    //         localStorage.setItem("accessToken", response.data.accessToken);
-    //         localStorage.setItem("refreshToken", response.data.refreshToken);
-    //         redirect(response.data.role)
-    //     })
-    //     .catch(function(error){
-    //         console.log(error)
-    //         localStorage.removeItem("accessToken")
-    //         localStorage.removeItem("refreshToken")
-    //     })
-    // }
-
-    // const tmp = () => {
-    //     client.get(`${client.defaults.baseURL}/posts`).then(response => {
-    //         console.log('posts response');
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         console.log('posts error');
-    //         console.log(error);
-    //     })
-    // }
-
     return (
         <div className='flex min-h-screen flex-col justify-center items-center bg-slate-50'>
             <div className='bg-white w-[416px] h-[486px] rounded-xl space-y-4 space-x-4'>
@@ -119,7 +85,6 @@ const Registration = () => {
                     <Link className='text-indigo-500 font-customFont' to="/Login"> Войти</Link>
                 </div>
             </div>
-            {/* <Button onClick={tmp}>asdf</Button> */}
         </div>
     );
 };
