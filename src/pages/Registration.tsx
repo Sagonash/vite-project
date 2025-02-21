@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label'
 import MyInput from '@/components/MyInput'
 import axios from 'axios';
 import { client } from '@/components/api'
+// import Posts from './Posts';
 
 const Registration = () => {
 
@@ -29,7 +30,7 @@ const Registration = () => {
     React.useEffect(() => {
         client.get('https://cpt-stage-2.duckdns.org/api/users/me')
         .then(response => {
-            window.location = 'Writer_my_post'
+            window.location = '/Posts'
         })
         .catch(function(error){
             console.log(error);
@@ -47,7 +48,8 @@ const Registration = () => {
         .then(function(response){
             localStorage.setItem("accessToken", response.data.accessToken);
             localStorage.setItem("refreshToken", response.data.refreshToken);
-            window.location = 'Writer_my_post'
+            window.location = '/Posts'
+            // redirect(Posts)
         })
         .catch(function(error){
             console.log(error);
@@ -58,9 +60,9 @@ const Registration = () => {
         <div className='flex min-h-screen flex-col justify-center items-center bg-slate-50'>
             <div className='bg-white w-[416px] h-[486px] rounded-xl space-y-4 space-x-4'>
                 <h4 className="font-customFont text-slate-900 text-xl font-semibold mt-4 ml-4">Создать аккаунт</h4>
-                <MyInput label={"Почта"} placeholder={"Введите почту"} type={"email"} name={'Reg_mail'} onChange={e => setEmail(e.currentTarget.value)}/>
-                <MyInput label={"Пароль"} placeholder={"Введите пароль"} type={"password"} name={'Reg_password'} onChange={e => setPassword(e.currentTarget.value)}/>
-                <MyInput label={"Повторите пароль"} placeholder={"Повторите пароль"} type={"password"} name={'Reg_password_repeat'} 
+                <MyInput className='rounded-[6px]' label={"Почта"} placeholder={"Введите почту"} type={"email"} name={'Reg_mail'} onChange={e => setEmail(e.currentTarget.value)}/>
+                <MyInput className='rounded-[6px]' label={"Пароль"} placeholder={"Введите пароль"} type={"password"} name={'Reg_password'} onChange={e => setPassword(e.currentTarget.value)}/>
+                <MyInput className='rounded-[6px]' label={"Повторите пароль"} placeholder={"Повторите пароль"} type={"password"} name={'Reg_password_repeat'} 
                 onChange={e => setPasswordRepeat(e.currentTarget.value)}/>
                 <div className='space-y-[6px]'>
                     <Label className="block font-customFont text-sm font-medium text-left text-slate-900">Выберите роль</Label>

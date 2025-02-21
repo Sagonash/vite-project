@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import MyInput from '@/components/MyInput'
 import { useState } from 'react';
 import axios from 'axios';
+// import Posts from './Posts';
 // import { client } from '@/components/api'
 
 const Login = () => {
@@ -19,34 +20,13 @@ const Login = () => {
         .then(function(response){
             localStorage.setItem("accessToken", response.data.accessToken);
             localStorage.setItem("refreshToken", response.data.refreshToken);
-            window.location = '/Writer_my_post'
+            window.location = '/Posts'
+            // redirect(Posts)
         })
         .catch(function(error){
             console.log(error);
         })
     }
-
-    // const getRole = () => {
-    //     client.get(`${client.defaults.baseURL}/users/me`)
-    //     .then(function(response){
-    //         return response
-    //     })
-    //     .catch(function(error){
-    //         console.log("getRole error");
-    //         console.log(error)
-    //     })
-    // }
-
-    // const tmp = () => {
-    //     client.get(`${client.defaults.baseURL}/posts`).then(response => {
-    //         console.log('posts response');
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         console.log('posts error');
-    //         console.log(error);
-    //     })
-    // }
 
     return (
         <div className="flex min-h-screen flex-col justify-center items-center bg-slate-50">
@@ -64,7 +44,6 @@ const Login = () => {
                     <Link className='text-indigo-500 font-customFont' to="/Registration"> Создать аккаунт</Link>
                 </div>
             </div>
-            {/* <Button onClick={tmp}>asdf</Button> */}
         </div>
     );
 };
