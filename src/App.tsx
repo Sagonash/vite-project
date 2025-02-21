@@ -1,6 +1,7 @@
 import Login from '@/pages/Login';
 import Registration from '@/pages/Registration';
-import Writer_my_post from '@/pages/Writer_my_post';
+import Posts from '@/pages/Posts';
+import Post_inside from '@/pages/Post_inside';
 
 import {
   BrowserRouter as Router,
@@ -29,8 +30,13 @@ function App() {
                 />
                 
                 <Route
-                    path='/Writer_my_post'
-                    element={<Writer_my_post/>}
+                    path='/Posts/:id'
+                    element={<Post_inside/>}
+                />
+
+                <Route
+                    path='/Posts'
+                    element={<Posts/>}
                 />
 
             </Routes>
