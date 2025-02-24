@@ -188,7 +188,7 @@ const Posts = () => {
                 <SidebarProvider className='w-52 sticky top-0 h-screen'>
                     <AppSidebar />
                 </SidebarProvider>
-                <div className='space-y-6'>
+                <div className='space-y-6 w-[768px]'>
                     <Menubar ref={menuBarRef} className='w-[206px] h-10 rounded-[6px]'>
                         <MenubarMenu>
                             <MenubarTrigger onClick={postsBtn} className='cursor-pointer font-customFont text-sm font-medium py-[6px] w-[100px] h-8 ml-0 hover:bg-zinc-100 focus:bg-zinc-100 rounded-[6px] text-center'>

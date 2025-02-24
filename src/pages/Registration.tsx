@@ -12,7 +12,7 @@ const Registration = () => {
     const [Email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
     const [PasswordRepeat, setPasswordRepeat] = useState('')
-    const [Role, setRole] = useState('')
+    const [Role, setRole] = useState('reader')
 
     const handleClick = (e) => {
         e.preventDefault();
